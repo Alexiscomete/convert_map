@@ -5,6 +5,7 @@
 plugins {
     java
     `maven-publish`
+    id("org.jetbrains.kotlin.jvm") version "1.7.0"
     application
 }
 
@@ -25,7 +26,11 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.8.2")
 }
 
-group = "org.example"
+application {
+    mainClass.set("io.github.alexiscomete.consoleapp.MainKt")
+}
+
+group = "io.github.alexiscomete.consoleapp"
 version = "1.0-SNAPSHOT"
 description = "consoleApp"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
@@ -38,4 +43,15 @@ publishing {
 
 tasks.withType<JavaCompile>() {
     options.encoding = "UTF-8"
+}
+
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "io.github.alexiscomete.consoleapp.MainKt"
+    }
+    configurations["compileClasspath"].forEach { file: File ->
+        println(file.name)
+        from(zipTree(file.absoluteFile))
+    }
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
