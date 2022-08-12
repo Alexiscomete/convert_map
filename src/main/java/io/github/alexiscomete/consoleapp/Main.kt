@@ -19,7 +19,7 @@ const val FACTOR = 10
 class UsedToLoad
 
 fun main(args: Array<String>) {
-    val imageOut = BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB)
+    val imageOut = BufferedImage(WIDTH * FACTOR, HEIGHT * FACTOR, BufferedImage.TYPE_INT_RGB)
     val imageIn = ImageIO.read(
         UsedToLoad::class
             .java
@@ -28,6 +28,7 @@ fun main(args: Array<String>) {
     )
     val inWidth = imageIn.width
     val inHeight = imageIn.height
+    val graph = imageOut.createGraphics()
     for (x in 0 until WIDTH) {
         for (y in 0 until HEIGHT) {
             val xIn = x * inWidth / WIDTH
@@ -35,13 +36,17 @@ fun main(args: Array<String>) {
             val pixel = imageIn.getRGB(xIn, yIn)
             val color = Color(pixel)
             val isDirt = color.blue <= (color.red.toFloat() + color.green.toFloat()).toInt() / 1.5
+            graph.color = Color.black
+            graph.fillRect(x * FACTOR, y * FACTOR, FACTOR, FACTOR)
             if (isDirt) {
-                imageOut.setRGB(x, y, COLOR_2)
+                graph.color = Color(COLOR_2)
             } else {
-                imageOut.setRGB(x, y, COLOR_1)
+                graph.color = Color(COLOR_1)
             }
+            graph.fillRect(x * FACTOR + 1, y * FACTOR + 1, FACTOR - 2, FACTOR - 2)
         }
     }
-    ImageIO.write(imageOut, "png", File("out.png"))
+    graph.dispose()
+    ImageIO.write(imageOut, "png", File("out2.png"))
 }
 
