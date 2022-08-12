@@ -3,21 +3,13 @@
  */
 
 plugins {
-    java
-    `maven-publish`
     id("org.jetbrains.kotlin.jvm") version "1.7.0"
     application
 }
 
 repositories {
     mavenLocal()
-    maven {
-        url = uri("https://repo1.maven.org/maven2/")
-    }
-
-    maven {
-        url = uri("https://repo.maven.apache.org/maven2/")
-    }
+    mavenCentral()
 }
 
 dependencies {
@@ -33,13 +25,7 @@ application {
 group = "io.github.alexiscomete.consoleapp"
 version = "1.0-SNAPSHOT"
 description = "consoleApp"
-java.sourceCompatibility = JavaVersion.VERSION_1_8
-
-publishing {
-    publications.create<MavenPublication>("maven") {
-        from(components["java"])
-    }
-}
+java.sourceCompatibility = JavaVersion.VERSION_11
 
 tasks.withType<JavaCompile>() {
     options.encoding = "UTF-8"
