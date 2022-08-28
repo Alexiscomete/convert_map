@@ -8,8 +8,8 @@ import javax.imageio.ImageIO
 // ==== Change the number of pixels in a image ====
 
 // size of the new image
-const val WIDTH = 528
-const val HEIGHT = 272
+const val WIDTH = 500
+const val HEIGHT = 500
 // 2 colors of the image, set with condition
 const val COLOR_1 = 0x4a7899
 const val COLOR_2 = 0x754b30
@@ -24,7 +24,7 @@ fun main(args: Array<String>) {
         UsedToLoad::class
             .java
             .classLoader
-            .getResourceAsStream("base.png")
+            .getResourceAsStream("NORMAL.png")
     )
     val inWidth = imageIn.width
     val inHeight = imageIn.height
