@@ -24,7 +24,7 @@ fun main(args: Array<String>) {
         UsedToLoad::class
             .java
             .classLoader
-            .getResourceAsStream("NORMAL.png")
+            .getResourceAsStream("NORMAL2.png")
     )
     val inWidth = imageIn.width
     val inHeight = imageIn.height
