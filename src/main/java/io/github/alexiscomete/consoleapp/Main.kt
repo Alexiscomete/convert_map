@@ -14,7 +14,7 @@ const val HEIGHT = 500
 const val COLOR_1 = 0x4a7899
 const val COLOR_2 = 0x754b30
 // multiplication factor of size of the image : draw a square around each pixel
-const val FACTOR = 10
+const val FACTOR = 1
 
 class UsedToLoad
 
@@ -36,14 +36,12 @@ fun main(args: Array<String>) {
             val pixel = imageIn.getRGB(xIn, yIn)
             val color = Color(pixel)
             val isDirt = color.blue <= (color.red.toFloat() + color.green.toFloat()).toInt() / 1.5
-            graph.color = Color.black
-            graph.fillRect(x * FACTOR, y * FACTOR, FACTOR, FACTOR)
             if (isDirt) {
                 graph.color = Color(COLOR_2)
             } else {
                 graph.color = Color(COLOR_1)
             }
-            graph.fillRect(x * FACTOR + 1, y * FACTOR + 1, FACTOR - 2, FACTOR - 2)
+            graph.fillRect(x * FACTOR, y * FACTOR, FACTOR, FACTOR)
         }
     }
     graph.dispose()
